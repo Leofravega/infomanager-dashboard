@@ -652,7 +652,8 @@ else:
 
 if __name__ == '__main__':
     print("🚀 Iniciando InfoManager...")
-    print("📍 Accede a http://localhost:8050")
+    port = int(os.environ.get('PORT', 8050))
+    print(f"📍 Accede a http://localhost:{port}")
     if kpi_df is not None:
         print(f"📊 Datos cargados: {len(kpi_df)} métricas, {len(available_months)} meses")
-    app.run_server(debug=True, port=8050, host='0.0.0.0')
+    app.run_server(debug=True, port=port, host='0.0.0.0')
