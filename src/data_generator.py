@@ -18,8 +18,13 @@ def load_monthly_summary():
         # Try to load from uploads folder first
         if EXCEL_FILE.exists():
             file_to_load = EXCEL_FILE
-        else:
+            print(f"📁 Loading from: {file_to_load}")
+        elif ORIGINAL_FILE.exists():
             file_to_load = ORIGINAL_FILE
+            print(f"📁 Loading from: {file_to_load}")
+        else:
+            print(f"⚠️  Excel file not found at {ORIGINAL_FILE}")
+            return None
         
         df_raw = pd.read_excel(file_to_load, sheet_name='resumen mensual', header=None)
         
@@ -67,7 +72,10 @@ def load_monthly_summary():
         return kpi_df
     
     except Exception as e:
-        print(f"Error loading Excel: {e}")
+        print(f"❌ Error loading Excel: {e}")
+        print(f"   Tried: {EXCEL_FILE} and {ORIGINAL_FILE}")
+        import traceback
+        traceback.print_exc()
         return None
 
 def get_kpi_annual_data():

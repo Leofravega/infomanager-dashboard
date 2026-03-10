@@ -33,10 +33,10 @@ ADMIN_PASSWORD = "admin123"
 # Load data
 ts_df, kpi_df, available_months = get_kpi_annual_data()
 
-if kpi_df is None:
+if kpi_df is None or len(kpi_df) == 0:
     app.layout = html.Div([
-        html.H1("Error loading data"),
-        html.P("Could not load Excel file")
+        html.H1("⚠️ Error cargando datos"),
+        html.P("No se pudo cargar el archivo Excel. Asegúrate de que 'Resumen mensual INFOMANAGER (1).xlsx' esté en la carpeta raíz.")
     ])
 else:
     # Month order for proper sorting
